@@ -1,0 +1,28 @@
+---
+const res = await fetch('https://caters.co.jp/assets/data/works.json');
+const posts = await res.json();
+import { Counter } from '../components/Counter.jsx';
+import Button from '../components/Button.astro';
+import Layout from '../layouts/Layout.astro';
+import Main from '../layouts/Main.astro';
+---
+
+<Layout title="タイトル">
+	<Main>
+		<p>Mainコンテンツです。</p>
+		<Button title="ボタンです。" />
+		<figure>
+			<img src="/images/dog.png" alt="ドッグ" >
+		</figure>
+		<Counter client:load />
+		{posts.works.map((works: any) => (
+			<div>
+				<h2>{works.title}</h2>
+			</div>
+		))}
+	</Main>
+</Layout>
+
+<style lang="scss">
+	@import '../styles/global.scss';
+</style>
